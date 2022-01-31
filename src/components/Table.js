@@ -7,12 +7,27 @@ import { gql } from "apollo-boost";
 
 const Container = styled.div``;
 const Heading = styled.h2`
-  padding: 20px;
+  padding: 10px;
   font-weight: 600;
 `;
 const TableRow = styled.tr`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  width: 100%;
+  &: nth-of-type(odd) {
+    background-color: #f3f2f8;
+  }
+`;
+
+const TableData = styled.td`
+  padding: 0.2rem;
+`;
+
+const Tab = styled.div`
+  margin-left: 10px;
+  height: 450px;
+  width: 300px;
+  overflow-y: scroll;
 `;
 
 const Loader = styled.div`
@@ -22,17 +37,13 @@ const Loader = styled.div`
 
 const GET_DATA = gql`
   {
-    regions {
-      name
-      subRegions {
+    countries(count: 195, filter: { hasCases: true }) {
+      results {
         name
-        countries(count: 10, filter: { hasCases: true }) {
-          results {
-            name
-            latest {
-              confirmed
-            }
-          }
+        latest {
+          confirmed
+          lastUpdated
+          deceased
         }
       }
     }
@@ -40,6 +51,8 @@ const GET_DATA = gql`
 `;
 
 function Table(props) {
+  console.log("props", props);
+
   if (props.data.loading) {
     return (
       <Loader>
@@ -50,18 +63,19 @@ function Table(props) {
     );
   }
   if (!props.data.loading) {
-    console.log("table", props);
     return (
       <Container>
         <Heading>Live cases by countries</Heading>
-        <TableRow>
-          {props.regions.subRegions.countries.results.map((country, index) => (
-            <div>
-              <td>{country.name}</td>
-              <td>{country.latest.confirmed}</td>
-            </div>
+        <Tab>
+          {props.data.countries.results.map((country, index) => (
+            <TableRow>
+              <TableData>{country.name}</TableData>
+              <TableData>
+                <strong>{country.latest.confirmed}</strong>
+              </TableData>
+            </TableRow>
           ))}
-        </TableRow>
+        </Tab>
       </Container>
     );
   }

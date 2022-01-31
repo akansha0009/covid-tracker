@@ -24,7 +24,20 @@ const Loader = styled.div`
 `;
 
 function Dropdown(props) {
-  console.log("countries", props);
+   console.log("countries", props);
+  // const pro = {
+  //   data: {
+  //     loading: false,
+  //     countries: {
+  //       results: [
+  //         {
+  //           name: 'India',
+  //           code: 'In'
+  //         }
+  //       ]
+  //     }
+  //   }
+  // }
   const [country, setCountry] = useState("worldwide");
   const onChangeCountry = (event) => {
     const countryCode = event.target.value;
@@ -61,4 +74,5 @@ function Dropdown(props) {
   }
 }
 
+// export default Dropdown;
 export default graphql(GET_COUNTRIES)(Dropdown);

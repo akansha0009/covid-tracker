@@ -10,6 +10,7 @@ import styled from "styled-components";
 import Latest from "./components/Latest";
 import { Card } from "@mui/material";
 import Table from "./components/Table";
+import Footer from "./components/Footer";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -34,16 +35,21 @@ const Main = styled.div`
   justify-content: space-evenly;
   padding: 20px;
   margin: 10px;
+  margin-bottom: 0;
+  padding-bottom:0;
 `;
 
-const Container = styled.div`
-  // flex: 0.9;
-`;
 
 const AppLeft = styled.div`
   width: 70%;
   margin: 10px;
 `;
+
+const Container1 = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`
 
 const AppRight = styled.div``;
 
@@ -52,6 +58,7 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
+      <Container1>
       <Main>
         <AppLeft>
           <Header>
@@ -69,6 +76,8 @@ function App() {
           </Card>
         </AppRight>
       </Main>
+      <Footer />
+      </Container1>
     </ApolloProvider>
   );
 }

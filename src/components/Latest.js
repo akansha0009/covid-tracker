@@ -20,6 +20,7 @@ const LatestCases = styled.div`
   height: 200px;
   width: 100%;
   text-align: center;
+  margin-bottom: 0px;
 `;
 const Cases = styled.div`
   margin-top: 10px;
@@ -32,18 +33,20 @@ const Heading = styled.h3`
 const Value = styled.h3`
   color: black;
 `;
-const Footer = styled.h5`
-  margin: 30px;
-  font-weight: 600;
-  color: red;
-`;
+
 const Loader = styled.div`
   display: flex;
   justify-content: center;
 `;
 
 function Latest(props) {
-  console.log("cases", props);
+   console.log("cases", props);
+  // const pro = {
+  //   data: {
+  //     loading: false,
+
+  //   }
+  // }
   if (props.data.loading) {
     return (
       <Loader>
@@ -66,15 +69,6 @@ function Latest(props) {
             Deceased: <Value>{props.data.latest.deceased}</Value>
           </Heading>
         </Cases>
-
-        <Footer>
-          <Footer>
-            We long to return to normal, but **normal led to this**. To avert
-            the future pandemics we know are coming, we MUST grapple with all
-            the ways normal failed us. We have to build something better. I hope
-            this piece, in showing what went wrong, helps.
-          </Footer>
-        </Footer>
       </LatestCases>
     );
   }
